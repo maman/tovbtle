@@ -7,9 +7,11 @@ task :default => :new
 desc "Create a new article."
 task :new do
   title = ask('Title: ')
+  description = ask('Description(Optional): ')
+  link = ask('Link(Optional): ')
   slug = title.empty?? nil : title.strip.slugize
 
-  article = {'title' => title, 'date' => Time.now.strftime("%d/%m/%Y")}.to_yaml
+  article = {'title' => title, 'date' => Time.now.strftime("%d/%m/%Y"), 'description' => description, 'link' => link}.to_yaml
   article << "\n"
   article << "Once upon a time...\n\n"
 
