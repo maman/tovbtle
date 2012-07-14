@@ -1,0 +1,56 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>
+    <% if @path == 'index' %>
+      <%= title %>
+    <% elsif @path.split('/').compact.length == 4 %>
+      <%= title %> - Achmad Mahardi: blog
+    <% else %>
+      <%= @path.capitalize.gsub(/[-]/, ' ') %> - Achmad Mahardi: blog
+    <% end %>
+  </title>
+  <meta name="description" content="<%= @context[:description] || 'Blog of Achmad Mahardi' %>" />
+  <meta name="author" content="<%= @config[:author] %>">
+  <meta name="viewport" content="width=device-width">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="alternate" type="application/atom+xml" title="<%= title %> - feed" href="/index.xml" />
+  <link rel="stylesheet" href="/css/reset.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/extra.css">
+  <link rel="stylesheet" href="/css/font-awesome.css">
+  <script src="/js/libs/prefixfree.min.js"></script>
+</head>
+<body>
+  <header id="sidebar" class="clearfix">
+    <aside id="logo" class="clearfix">
+      <div class="clearfix">
+        <a href="/">Achmad Mahardi Kusuma Rachman</a>
+      </div>
+    </aside>
+    <ul id="meta">
+      <li class="blogname"><h1 id="blogname"><a href="/" title="Welcome">Welcome!</a></h1></li>
+      <li class="tagline"><h2 id="tagline">the blog of Achmad Mahardi</h2></li>
+      <li class="website link"><a href="http://mahardi.heroku.com" title="website" target="_blank">mahardi.heroku.com</a></li>
+      <li class="twitter link"><a href="http://twitter.com/achmadmahardi" title="twitter" target="_blank">@achmadmahardi</a></li>
+      <li class="email link"><a href="mailto:maman.lalilu@gmail.com&subject=Hello!" title="email" target="_blank">mail me</a></li>
+    </ul>
+    <nav>
+      <ul>
+        <li><a href="/archives" title="Archive">Archive</a></li>
+        <li><a href="/about" title="About">Colophon</a></li>
+      </ul>
+    </nav>
+  </header>
+  <section id="main">
+    <%= yield %>
+  </section>
+  <!--<script src="/js/libs/jquery-1.7.2.min.js"></script>
+  <script src="/js/plugins.js"></script>
+  <script src="/js/script.js"></script>-->
+</body>
+</html>

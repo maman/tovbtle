@@ -1,0 +1,18 @@
+<header id="lupd">
+  List of published articles
+</header>
+<% if archives.length > 0 %>
+   	<% for entry in archives %>
+		<article class="archive">
+			<header class="clearfix">
+				<h1><a href="<%= entry.path %>"><%= entry.title %></a></h1>
+				<h2>published on <%= entry.datetime %></h2>
+			</header>
+		</article>
+	<% end %>
+<% end %>
+<nav>
+  <ul>
+    <li><a href="/" title="Back">Back to blog</a></li>
+  </ul>
+</nav>

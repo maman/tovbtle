@@ -1,0 +1,44 @@
+<header id="lupd">
+  Published on <time datetime="<%= dateUTC %>"><%= datetime %></time>
+</header>
+<article class="hentry">
+  <header>
+    <% if !link.nil? %>
+      <% if linktitle.index 'Github' %>
+        <small class="entry-unrelated" >github</small>
+      <% elsif linktitle.index 'Twitter' %>
+        <small class="entry-unrelated" >twitter</small>
+      <% elsif linktitle.index 'Google+' %>
+        <small class="entry-unrelated" >google plus</small>
+      <% elsif linktitle.index 'YouTube' %>
+        <small class="entry-unrelated" >youtube</small>
+      <% elsif link.index 'reddit' %>
+        <small class="entry-unrelated" >reddit</small>
+      <% end %>
+      <h1 class="entry-title"><a href="<%= link %>" title="<%= linktitle %>"><%= linktitle %></a><a href="<%= path %>" title="Permalink to article"><i class="icon-link"></i></a></h1>
+    <% else %>
+      <h1 class="entry-title"><%= title %></h1>
+    <% end %>
+    <time class="updated visuallyhidden" datetime="<%= dateUTC %>" pubdate><%= datetime %></time>
+  </header>
+  <div class="entry-content">
+    <%= body %>
+  </div>
+</article>
+<nav>
+  <ul>
+    <li><a href="/" title="Back">Back to blog</a></li>
+    <li><a class="btn" href="https://twitter.com/share?url=http://mahardi.heroku.com<%= article.path %>&text=<%= title %> by @achmadmahardi&count=horizontal" target="_blank" rel="nofollow">Tweet</a></li>
+  </ul>
+</nav>
+
+<!--<article class="post">
+  <section class="comments">
+    <% if @config[:disqus] %>
+      <div id="disqus_thread"></div>
+      <script type="text/javascript" src="http://disqus.com/forums/<%= @config[:disqus] %>/embed.js"> </script>
+      <noscript><a href="http://<%= @config[:disqus] %>.disqus.com/?url=ref">View the discussion thread.</a></noscript>
+      <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+    <% end %>
+  </section>
+</article>-->

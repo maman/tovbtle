@@ -1,0 +1,14 @@
+::selection { 
+	background: red;
+	opacity: 1.0;
+	color: #fff;
+	text-shadow: none;
+}
+
+.entry-content blockquote:before {
+	text-shadow: 0 0 5px rgba(255, 0, 0, 0.8);
+}
+
+.entry-content pre code {
+	text-shadow: 0 0 25px rgba(56, 56, 56, 0.5);
+}

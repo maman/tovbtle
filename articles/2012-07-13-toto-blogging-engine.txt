@@ -1,0 +1,74 @@
+title: Toto Blogging Engine
+author: Lyman Frank Baum
+date: 2012/07/13
+description: Nothing
+
+<small>jancoks</small>
+
+###buurn
+**Dorothy** lived in the midst of the great Kansas prairies, with Uncle Henry, 
+who was a farmer, and Aunt `Em`, who was the farmer's wife.
+
+>Bintang dilangit  
+>Kerlip engkau disana ~
+
+`matane`
+	require 'toto'
+	require File.expand_path('../helper', __FILE__)
+
+	# Rack config
+	use Rack::Static, :urls => ['/css', '/js', '/img', '/font', '/favicon.ico'], :root => 'public'
+	use Rack::CommonLogger
+
+	if ENV['RACK_ENV'] == 'development'
+		use Rack::ShowExceptions
+	end
+
+	#
+	# Create and configure a toto instance
+	#
+	toto = Toto::Server.new do
+		#
+		# Add your settings here
+		# set [:setting], [value]
+		# 
+		set :author,    "Achmad Mahardi"                          # blog author
+		set :title,     "Achmad Mahardi: blog"                    # site title
+		set :root,      "index"                                   # page to load on /
+		set :date,      lambda {|now| now.strftime("%d/%m/%Y") }  # date format for articles
+		set :markdown,  :smart                                    # use markdown + smart-mode
+		# set :disqus,    false                                   # disqus id, or false
+		set :summary,   :max => 1000, :delim => /%/                # length of article summary and delimiter
+		# set :ext,       'txt'                                   # file extension for articles
+		# set :cache,      28800                                  # cache duration, in seconds
+
+		set :date, lambda {|now| now.strftime("%B #{now.day.ordinal} %Y") }
+	end
+
+	run toto
+
+and the helper is: 
+
+	require 'hpricot'
+
+	module Toto
+		class Article < Hash
+			include Template
+
+			def link()  self[:link]	end
+
+			def linktitle
+				alias :link link
+				doc = Hpricot(open(link))
+				(doc/"title").inner_text
+			end
+
+			def dateUTC
+				lambda {|now| now.strftime("%Y-%m-%d") }.call(self[:date])
+			end
+
+			def datetime
+				lambda {|now| now.strftime("%B %d, %Y") }.call(self[:date])
+			end
+		end
+	end

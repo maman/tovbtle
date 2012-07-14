@@ -1,0 +1,31 @@
+<header id="lupd">
+  <time datetime="<%= Time.now.strftime("%Y-%m-%d %H:%M:%S%z") %>"><%= Time.now.strftime("%B %d, %Y") %></time>
+</header>
+<% for article in articles[0...5] %>
+<article class="hentry">
+  <header>
+    <% if !article.link.nil? %>
+      <% if article.linktitle.index 'Github' %>
+        <small class="entry-unrelated" >github</small>
+      <% elsif article.linktitle.index 'Twitter' %>
+        <small class="entry-unrelated" >twitter</small>
+      <% elsif article.linktitle.index 'Google+' %>
+        <small class="entry-unrelated" >google plus</small>
+      <% elsif article.linktitle.index 'YouTube' %>
+        <small class="entry-unrelated" >youtube</small>
+      <% elsif article.link.index 'reddit' %>
+        <small class="entry-unrelated" >reddit</small>
+      <% end %>
+      <h1 class="entry-title"><a href="<%= article.link %>" title="<%= article.title %>"><%= article.linktitle %></a><a href="<%= article.path %>" title="Permalink to article"><i class="icon-link"></i></a></h1>
+    <% else %>
+      <h1 class="entry-title"><a href="<%= article.path %>"><%= article.title %></a></h1>
+    <% end %>
+  </header>
+  <div class="entry-content">
+    <%= article.summary %>
+    <% if article.summary.count("/n") != article.body.count("/n") %>
+      <a href="<%= article.path %>" title="read">read on</a>
+    <% end %>
+  </div>
+</article>
+<% end %>
